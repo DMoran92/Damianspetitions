@@ -1,22 +1,25 @@
 package com.devopsca.damianspetitions;
 
+import com.devopsca.damianspetitions.service.PetitionService;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @SpringBootApplication
-@RestController
 public class DamianspetitionsApplication {
+
+	@Autowired
+	private PetitionService petitionService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DamianspetitionsApplication.class, args);
 	}
 
-	@GetMapping("/hello")
-	public String sayHello(@RequestParam(value = "myName", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
-	}
 
+	@PostConstruct
+	public void init() {
+		petitionService.initializeDefaultPetitions();
+	}
 }
