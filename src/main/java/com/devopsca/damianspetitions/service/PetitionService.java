@@ -10,4 +10,5 @@ public interface PetitionService {
     Petition getPetitionById(Long id);
     void addPetition(Petition petition);
     void addSignatureToPetition(Petition petition, String name, String email);
+    Petition searchPetitionByTitle(String title);
 }

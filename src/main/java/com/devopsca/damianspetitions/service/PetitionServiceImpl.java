@@ -61,4 +61,15 @@ public class PetitionServiceImpl implements PetitionService {
         signatures.add(signature);
         System.out.println("New signature added");
     }
+
+    @Override
+    public Petition searchPetitionByTitle(String title) {
+        /* to avoid issues make the title lower case */
+        String lowerCaseTitle = title.toLowerCase();
+
+        return petitions.values().stream()
+                .filter(petition -> petition.getTitle().toLowerCase().contains(lowerCaseTitle))
+                .findFirst()
+                .orElse(null);
+    }
 }

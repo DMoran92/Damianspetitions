@@ -4,6 +4,12 @@
 </head>
 <body>
 
+<form th:action="@{/petitions/search}" method="get">
+    <label for="title">Search by Title:</label>
+    <input type="text" id="title" name="title" />
+    <button type="submit">Search</button>
+</form>
+
 <h2>View Petitions</h2>
 <table border = "2">
     <thead>
