@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <title>Petition Details</title>
+</head>
+<body>
+<div>
+    <h1>Petition Title: <span th:text="${petition.title}"></span></h1>
+    <h3>Petition Details:</h3>
+    <span th:text="${petition.content}"></span>
+    <!-- loop through the list of signatures and display them -->
+    <h3>Signatures:</h3>
+    <ul th:if="${petition.signatures != null}">
+        <li th:each="signature : ${petition.signatures}">
+            <span th:text="${signature.name}"></span> - <span th:text="${signature.email}"></span>
+        </li>
+    </ul>
+
+    <!-- Form to add a new signature -->
+    <h2>Add your signature to the petition:</h2>
+    <form action="/petitions/add-signature" method="post">
+       <!-- pass petition id in the form for easy access in addSignature controller,
+            but hide it from the user to block ability to change it -->
+        <input type="hidden" name="petitionId" th:value="${petition.id}">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Add Signature</button>
+    </form>
+</div>
+<a th:href="@{/}">Back to Petitions</a>
+</body>
+</html>

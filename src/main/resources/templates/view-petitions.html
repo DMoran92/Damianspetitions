@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <title>View Petitions</title>
 </head>
@@ -11,6 +11,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Signature Count</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,9 @@
         <td th:text="${petition.id}"></td>
         <td th:text="${petition.title}"></td>
         <td th:text="${#lists.size(petition.signatures)}"></td>
+        <td>
+            <a th:href="'/petitions/' + ${petition.id}">View Details & Add Signature</a>
+        </td>
     </tr>
     </tbody>
 </table>
