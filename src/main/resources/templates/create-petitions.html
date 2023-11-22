@@ -5,6 +5,11 @@
 <body>
 <h2>Create Petition</h2>
 
+<!-- Check if there's an error message from the controller -->
+<div th:if="${errorMessage}" style="color: red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+
 <form action="/petitions/create" method="post">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" required>

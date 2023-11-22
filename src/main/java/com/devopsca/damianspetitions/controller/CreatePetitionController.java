@@ -4,6 +4,7 @@ import com.devopsca.damianspetitions.model.Petition;
 import com.devopsca.damianspetitions.service.PetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,15 @@ public class CreatePetitionController {
             @RequestParam String title,
             @RequestParam String content,
             @RequestParam String name,
-            @RequestParam String email) {
+            @RequestParam String email,
+            Model model) {
+
+        /* Check if a petition with the same title already exists */
+        if (petitionService.searchPetitionByTitle(title) != null) {
+            model.addAttribute("errorMessage",
+                    "Petition with the same name was already created. Please use search function.");
+            return "create-petitions";
+        }
 
         /* Create a new petition and add it to the service */
         Petition newPetition = new Petition(title, content);
