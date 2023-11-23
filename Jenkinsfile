@@ -33,6 +33,9 @@ pipeline {
 
         stage ('Deploy') {
             steps {
+                timeout(time: 15, unit: "MINUTES") {
+                    input message: 'Do you want to approve the latest build deployment?', ok: 'Yes'
+                }
                 echo "Deploying"
                 sh 'docker build -f Dockerfile -t damianspetitions . '
                 sh 'docker rm -f "myapp" || true'
