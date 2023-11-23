@@ -12,6 +12,12 @@ pipeline {
                 sh 'mvn clean'
             }
         }
+        stage('Test') {
+          steps {
+            sh 'mvn --batch-mode -Dmaven.test.failure.ignore=true test'
+
+          }
+        }
         stage ('Package') {
             steps {
                 sh 'mvn package'
@@ -29,6 +35,8 @@ pipeline {
             steps {
                 echo "Deploying"
                 sh 'docker build -f Dockerfile -t damianspetitions . '
+                sh 'docker rm -f "myapp" || true'
+                sh 'docker run --name "myapp" -p 9090:8080 --detach damianspetitions:latest'
             }
         }
     }
