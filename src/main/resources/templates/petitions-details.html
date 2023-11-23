@@ -17,7 +17,7 @@
 
     <!-- Form to add a new signature -->
     <h2>Add your signature to the petition:</h2>
-    <form action="/petitions/add-signature" method="post">
+    <form th:action="@{/petitions/add-signature}" method="post">
        <!-- pass petition id in the form for easy access in addSignature controller,
             but hide it from the user to block ability to change it -->
         <input type="hidden" name="petitionId" th:value="${petition.id}">

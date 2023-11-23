@@ -27,7 +27,7 @@
     <td th:text="${#lists.size(petition.signatures)}"></td>
     <td>
       <!-- Link to view petition details -->
-      <a th:href="'/petitions/' + ${petition.id}">View Details & Add Signature</a>
+      <a th:href="@{/petitions/{path}(path=${petition.id})}">View Details & Add Signature</a>
     </td>
   </tr>
   </tbody>
